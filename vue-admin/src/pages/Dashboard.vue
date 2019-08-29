@@ -125,7 +125,14 @@
                         </div>
                     </el-col>
                 </el-row>
-                  <div id="myChart" style="{width: 100%; height: 350px}"></div>
+                <div class='chart-line'>
+                  <div id="smoothed-line" class="smoothed-line"></div>
+                </div>
+                <div class="chart-radar">
+                  <div id="basic-radar" class="basic-radar"></div>
+                  <!-- <div id="basic-radar" class="basic-radar"></div>
+                  <div id="basic-radar" class="basic-radar"></div> -->
+                </div>
             </el-main>
             <el-footer>Footer</el-footer>
         </el-container>
@@ -136,9 +143,8 @@
 export default {
   methods: {
     drawLine () {
-      console.log('1')
-      let myChart = this.$echarts.init(document.getElementById('myChart'))
-      myChart.setOption({
+      let smoothedLine = this.$echarts.init(document.getElementById('smoothed-line'))
+      smoothedLine.setOption({
         xAxis: {
           type: 'category',
           data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
@@ -146,87 +152,157 @@ export default {
         yAxis: {
           type: 'value'
         },
-        series: [{
-          data: [100, 120, 160, 140, 110, 165, 170],
-          type: 'line',
-          smooth: true
-        }]
+        series: [
+          {
+            data: [100, 120, 160, 140, 110, 165, 170],
+            type: 'line',
+            smooth: true
+          },
+          {
+            data: [120, 80, 90, 155, 160, 110, 145],
+            type: 'line',
+            smooth: true
+          }
+        ]
       })
     },
-    mounted () {
-      console.log('1')
-      this.drawLine()
+    drawBasicRader () {
+      let basicRadar = this.$echarts.init(document.getElementById('basic-radar'))
+      basicRadar.setOption({
+        title: {
+          text: '基础雷达图'
+        },
+        tooltip: {},
+        rader: {
+          name: {
+            textStyle: {
+              color: '#fff',
+              backgroundColor: '#999',
+              borderRadius: 3,
+              padding: [3, 5]
+            }
+          },
+          indicator: [
+            { name: 'Sales', max: 6500 },
+            {name: 'ninistration', max: 16000},
+            {name: 'Techology', max: 30000},
+            {name: 'Customer Support', max: 38000},
+            {name: 'Developme', max: 52000},
+            {name: 'Marketing', max: 25000}
+          ]
+        },
+        series: [{
+          name: '预算 vs 开销 vs 期望',
+          type: 'radar',
+          data: [
+            {
+              value: [4300, 10000, 28000, 35000, 50000, 19000],
+              name: '预算分配（Allocated Budget）'
+            },
+            {
+              value: [5000, 14000, 22000, 30000, 21000, 18000],
+              name: '期望开销（Expected Spending）'
+            },
+            {
+              value: [3000, 11000, 28000, 42000, 10000, 22000],
+              name: '实际开销（Actual Spending）'
+            }
+          ]
+        }]
+      })
     }
+  },
+  mounted () {
+    this.drawLine()
+    this.drawBasicRader()
   }
 }
 </script>
 
 <style scoped>
     .main {
-        background: #eaecef;
+      background: #eaecef;
     }
     .el-icon-s-fold::before {
-        margin-right: 20px
+      margin-right: 20px
     }
     .svg-icon > div {
-        background: #fff;
-        border-radius: 5px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 15px;
+      background: #fff;
+      border-radius: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 15px;
     }
     @media screen {
-        .svg-icon:nth-child(n) {
-            margin-top: 15px;
-        }
+      .svg-icon:nth-child(n) {
+          margin-top: 15px;
+      }
     }
     .svg-icon svg {
-        box-sizing: border-box;
-        width: 64px;
-        height: 64px;
-        padding: 10px;
-        border-radius: 4px;
-        transition: background ease-in-out .3s;
+      box-sizing: border-box;
+      width: 64px;
+      height: 64px;
+      padding: 10px;
+      border-radius: 4px;
+      transition: background ease-in-out .3s;
     }
     .svg-icon-1 svg path {
-        fill: #40c9c6;
+      fill: #40c9c6;
     }
     .svg-icon-2 svg path {
-        fill: #36a3f7;
+      fill: #36a3f7;
     }
     .svg-icon-3 svg path {
-        fill: #f4516c;
+      fill: #f4516c;
     }
     .svg-icon-4 svg path {
         fill: #34bfa3;
     }
     .svg-icon:hover {
-        cursor: pointer;
+      cursor: pointer;
     }
     .svg-icon-1:hover svg {
-        background-color: #40c9c6;
+      background-color: #40c9c6;
     }
     .svg-icon-2:hover svg {
-        background-color: #36a3f7;
+      background-color: #36a3f7;
     }
     .svg-icon-3:hover svg {
-        background-color: #f4516c;
+      background-color: #f4516c;
     }
     .svg-icon-4:hover svg {
-        background-color: #34bfa3;
+      background-color: #34bfa3;
     }
 
     .svg-icon-1:hover svg path, .svg-icon-2:hover svg path, .svg-icon-3:hover svg path, .svg-icon-4:hover svg path {
-        fill: #fff;
+      fill: #fff;
     }
     .svg-icon-title {
-        line-height: 18px;
-        color: rgba(0,0,0,.45);
-        font-size: 16px;
-        margin-bottom: 12px;
+      line-height: 18px;
+      color: rgba(0,0,0,.45);
+      font-size: 16px;
+      margin-bottom: 12px;
     }
     .svg-icon-mount {
-        font-size: 20px;
+      font-size: 20px;
+    }
+    .chart-line {
+      padding-top: 15px;
+    }
+    .smoothed-line {
+      width: 100%;
+      height: 350px;
+      background-color: #fff;
+      border-radius: 5px;
+    }
+    .chart-radar {
+      padding-top: 15px;
+    }
+    .basic-radar {
+      width: 100%;
+      height: 350px;
+      background-color: #fff;
+      border-radius: 5px;
     }
 </style>
