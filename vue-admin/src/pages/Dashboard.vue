@@ -125,6 +125,7 @@
                         </div>
                     </el-col>
                 </el-row>
+                  <div id="myChart" style="{width: 100%; height: 350px}"></div>
             </el-main>
             <el-footer>Footer</el-footer>
         </el-container>
@@ -133,7 +134,30 @@
 
 <script>
 export default {
-
+  methods: {
+    drawLine () {
+      console.log('1')
+      let myChart = this.$echarts.init(document.getElementById('myChart'))
+      myChart.setOption({
+        xAxis: {
+          type: 'category',
+          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        },
+        yAxis: {
+          type: 'value'
+        },
+        series: [{
+          data: [100, 120, 160, 140, 110, 165, 170],
+          type: 'line',
+          smooth: true
+        }]
+      })
+    },
+    mounted () {
+      console.log('1')
+      this.drawLine()
+    }
+  }
 }
 </script>
 
@@ -144,9 +168,6 @@ export default {
     .el-icon-s-fold::before {
         margin-right: 20px
     }
-
-    
-
     .svg-icon > div {
         background: #fff;
         border-radius: 5px;
@@ -155,13 +176,11 @@ export default {
         align-items: center;
         padding: 0 15px;
     }
-
-    @media screen and (max-width: 992px) {
-        .svg-icon:nth-child(n+3) {
+    @media screen {
+        .svg-icon:nth-child(n) {
             margin-top: 15px;
         }
     }
-
     .svg-icon svg {
         box-sizing: border-box;
         width: 64px;
@@ -170,7 +189,6 @@ export default {
         border-radius: 4px;
         transition: background ease-in-out .3s;
     }
-
     .svg-icon-1 svg path {
         fill: #40c9c6;
     }
@@ -183,12 +201,9 @@ export default {
     .svg-icon-4 svg path {
         fill: #34bfa3;
     }
-
     .svg-icon:hover {
         cursor: pointer;
     }
-
-
     .svg-icon-1:hover svg {
         background-color: #40c9c6;
     }
@@ -196,13 +211,22 @@ export default {
         background-color: #36a3f7;
     }
     .svg-icon-3:hover svg {
-        background-color:  #f4516c;
+        background-color: #f4516c;
     }
     .svg-icon-4:hover svg {
-        background-color:  #34bfa3;
+        background-color: #34bfa3;
     }
 
     .svg-icon-1:hover svg path, .svg-icon-2:hover svg path, .svg-icon-3:hover svg path, .svg-icon-4:hover svg path {
         fill: #fff;
+    }
+    .svg-icon-title {
+        line-height: 18px;
+        color: rgba(0,0,0,.45);
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+    .svg-icon-mount {
+        font-size: 20px;
     }
 </style>

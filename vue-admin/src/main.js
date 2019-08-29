@@ -3,10 +3,13 @@
 import Vue from 'vue'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+import echarts from 'echarts'
 import App from './App'
 import router from './router'
 
 Vue.use(ElementUI)
+Vue.use(echarts)
+Vue.prototype.$echarts = echarts
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
