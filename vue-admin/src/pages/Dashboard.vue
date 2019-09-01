@@ -204,9 +204,15 @@
           </el-col>
         </el-row>
         <el-row class="order-on" :gutter="16">
-          <el-col :span="8" :sm="24" :md="8" class="order"></el-col>
-          <el-col :span="8" :sm="24" :md="8" class="order"></el-col>
-          <el-col :span="8" :sm="24" :md="8" class="order"></el-col>
+          <el-col :span="12" :sm="24" :md="8" class="order">
+            <el-table :data="tableData" style="width: 100%">
+              <el-table-column prop="date" label="日期" width="180"></el-table-column>
+              <el-table-column prop="name" label="姓名"></el-table-column>
+              <el-table-column prop="address" label="地址"></el-table-column>
+            </el-table>
+          </el-col>
+          <el-col :span="6" :sm="24" :md="8" class="order"></el-col>
+          <el-col :span="6" :sm="24" :md="8" class="order"></el-col>
         </el-row>
       </el-main>
       <el-footer>Footer</el-footer>
@@ -216,6 +222,37 @@
 
 <script>
 export default {
+  data() {
+    return {
+      tableData: [
+        {
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路1518弄'
+        },
+        {
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路1518弄'
+        },
+        {
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路1518弄'
+        },
+        {
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路1518弄'
+        },
+        {
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路1518弄'
+        }
+      ]
+    }
+  },
   methods: {
     renderChart(domContainer, config) {
       let chart = this.$echarts.init(domContainer)
