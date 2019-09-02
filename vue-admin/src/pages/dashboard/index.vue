@@ -189,24 +189,24 @@
         </el-row>
 
         <el-row class="order-on" :gutter="16">
-          <el-col :span="12" :sm="24" :md="12" class="order">
-            <el-table :data="tableData" style="width: 100%">
+          <el-col :span="12" :sm="24" :md="12">
+            <el-table :data="tableData" style="width: 100%" class="order">
               <el-table-column prop="date" label="日期"></el-table-column>
               <el-table-column prop="name" label="姓名"></el-table-column>
               <el-table-column prop="address" label="地址"></el-table-column>
             </el-table>
           </el-col>
-          <el-col :span="6" :sm="24" :md="6" class="checkbox">
-            <div>
-              <el-checkbox>全选</el-checkbox>
-              <p>Todo List</p>
-              {{ checkedCities }}
+          <el-col :span="6" :sm="24" :md="6">
+            <div  class="checkbox">
+              <div class="radio-text">
+                <el-radio>全选</el-radio>
+                <el-input v-model="inputValue" placeholder="Todo List"></el-input>
+                <el-button type="primary" size="mini" @click="getTodoitem()">add</el-button>
+              </div>
+              <el-radio v-model="radio" label="1" class="radio-box" v-for="item in List" :key="item">{{item}}</el-radio>
             </div>
-            <el-checkbox-group v-model="checkedCities">
-              <el-checkbox v-for="city in cities" :key="city" :label="city">{{city}}</el-checkbox>
-            </el-checkbox-group>
           </el-col>
-          <el-col :span="6" :sm="24" :md="6" class="order"></el-col>
+          <el-col :span="6" :sm="24" :md="6"></el-col>
         </el-row>
       </el-main>
       <el-footer>Footer</el-footer>
@@ -217,8 +217,6 @@
 <script>
 import Chart from './components/Chart'
 import ListItem from './components/ListItem'
-
-const cityOptions = ['上海', '北京', '广州', '深圳']
 
 export default {
   components: {
@@ -409,8 +407,15 @@ export default {
           address: '上海市普陀区金沙江路1518弄'
         }
       ],
-      cities: cityOptions,
-      checkedCities: []
+      radio: '1',
+      inputValue: '',
+      List: []
+    }
+  },
+  methods: {
+    getTodoitem: function() {
+      this.List.push(this.inputValue)
+      this.inputValue = ''
     }
   }
 }
@@ -499,5 +504,27 @@ export default {
   height: 350px;
   background: #fff;
   border-radius: 5px;
+}
+
+.order, .checkbox {
+  background-color: #fff;
+  border-radius: 5px;
+}
+.radio-box {
+  width: 100%;
+  margin-right: 0;
+  box-sizing: border-box;
+  padding: 15px;
+}
+
+.el-radio {
+  box-sizing: border-box;
+  padding: 15px;
+  margin-right: 0;
+}
+.radio-text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 </style>
