@@ -197,14 +197,7 @@
             </el-table>
           </el-col>
           <el-col :span="6" :sm="24" :md="6">
-            <div  class="checkbox">
-              <div class="radio-text">
-                <el-radio>全选</el-radio>
-                <el-input v-model="inputValue" placeholder="Todo List"></el-input>
-                <el-button type="primary" size="mini" @click="getTodoitem()">add</el-button>
-              </div>
-              <el-radio v-model="radio" label="1" class="radio-box" v-for="item in List" :key="item">{{item}}</el-radio>
-            </div>
+            <Todo></Todo>
           </el-col>
           <el-col :span="6" :sm="24" :md="6"></el-col>
         </el-row>
@@ -217,11 +210,13 @@
 <script>
 import Chart from './components/Chart'
 import ListItem from './components/ListItem'
+import Todo from './components/Todo'
 
 export default {
   components: {
     Chart,
-    ListItem
+    ListItem,
+    Todo
   },
 
   data() {
@@ -417,6 +412,9 @@ export default {
       this.List.push(this.inputValue)
       this.inputValue = ''
     }
+    // deleteTodoitem: function() {
+    //   // this.List.splice()
+    // }
   }
 }
 </script>
