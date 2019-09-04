@@ -406,15 +406,6 @@ export default {
       inputValue: '',
       List: []
     }
-  },
-  methods: {
-    getTodoitem: function() {
-      this.List.push(this.inputValue)
-      this.inputValue = ''
-    }
-    // deleteTodoitem: function() {
-    //   // this.List.splice()
-    // }
   }
 }
 </script>
@@ -507,22 +498,5 @@ export default {
 .order, .checkbox {
   background-color: #fff;
   border-radius: 5px;
-}
-.radio-box {
-  width: 100%;
-  margin-right: 0;
-  box-sizing: border-box;
-  padding: 15px;
-}
-
-.el-radio {
-  box-sizing: border-box;
-  padding: 15px;
-  margin-right: 0;
-}
-.radio-text {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 </style>
