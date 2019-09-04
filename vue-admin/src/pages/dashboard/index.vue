@@ -199,10 +199,11 @@
           <el-col :span="6" :sm="24" :md="6">
             <Todo></Todo>
           </el-col>
-          <el-col :span="6" :sm="24" :md="6"></el-col>
+          <el-col :span="6" :sm="24" :md="6">
+            <ImageProgress></ImageProgress>
+          </el-col>
         </el-row>
       </el-main>
-      <el-footer>Footer</el-footer>
     </el-container>
   </el-container>
 </template>
@@ -211,12 +212,14 @@
 import Chart from './components/Chart'
 import ListItem from './components/ListItem'
 import Todo from './components/Todo'
+import ImageProgress from './components/ImageProgress'
 
 export default {
   components: {
     Chart,
     ListItem,
-    Todo
+    Todo,
+    ImageProgress
   },
 
   data() {
@@ -400,6 +403,26 @@ export default {
           date: '2016-05-02',
           name: '王小虎',
           address: '上海市普陀区金沙江路1518弄'
+        },
+        {
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路1518弄'
+        },
+        {
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路1518弄'
+        },
+        {
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路1518弄'
+        },
+        {
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路1518弄'
         }
       ],
       radio: '1',
@@ -495,7 +518,8 @@ export default {
   border-radius: 5px;
 }
 
-.order, .checkbox {
+.order,
+.checkbox {
   background-color: #fff;
   border-radius: 5px;
 }
