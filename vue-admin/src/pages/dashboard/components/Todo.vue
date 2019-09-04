@@ -5,41 +5,56 @@
       <el-input v-model="inputValue" placeholder="Todo List"></el-input>
       <el-button type="primary" size="mini" @click="getTodoitem()">添加</el-button>
     </div>
-    <el-checkbox-group v-model="checkList" v-for="(item, index) in List" :key="index" >
-      <el-checkbox  class="radio-box" :label="item"></el-checkbox>
-      <el-button type="primary" size="mini"  @click="deleteitem(index)">删除</el-button>
-    </el-checkbox-group>
+    <ul>
+      <li class="todo-item" v-for="(item, index) in showFilterList" :key="index">
+        <el-checkbox  class="radio-box" v-model="item.resolved"></el-checkbox>
+        <span>{{item.content}}</span>
+        <el-button @click="deleteitem(index)" type="text" icon="el-icon-delete" size="small"></el-button>
+      </li>
+    </ul>
+    <el-button-group>
+      <el-button @click="currentFilter='all'" :type="currentFilter === 'all' ? 'primary' : 'default'">全部</el-button>
+      <el-button @click="currentFilter='resolved'" :type="currentFilter === 'resolved' ? 'primary' : 'default'">已完成</el-button>
+      <el-button @click="currentFilter='pendding'" :type="currentFilter === 'pendding' ? 'primary' : 'default'">未完成</el-button>
+    </el-button-group>
   </div>
 </template>
 <script>
 export default {
   data() {
     return {
-      checkList: [],
       inputValue: '',
-      List: []
+      List: [],
+      currentFilter: 'all'
+    }
+  },
+  computed: {
+    showFilterList() {
+      switch (this.currentFilter) {
+        case 'all' :
+        default :
+          return this.List
+
+        case 'resolved' :
+          return this.List.filter(item => item.resolved)
+
+        case 'pendding' :
+          return this.List.filter(item => !item.resolved)
+      }
     }
   },
   methods: {
     getTodoitem: function() {
-      this.List.push(this.inputValue)
+      this.List.push({content: this.inputValue, resolved: false})
       this.inputValue = ''
     },
     deleteitem: function(index) {
-      this.checked = true
       this.List.splice(index, 1)
     }
   }
 }
 </script>
 <style scoped>
-.radio-box {
-  width: 100%;
-  margin-right: 0;
-  box-sizing: border-box;
-  padding: 15px;
-}
-
 .el-radio {
   box-sizing: border-box;
   padding: 15px;
@@ -50,7 +65,19 @@ export default {
   justify-content: space-between;
   align-items: center;
 }
-.el-checkbox-group {
+.radio-box {
+  margin-right: 0;
+  box-sizing: border-box;
+  padding: 15px;
+}
+
+.todo-item {
   display: flex;
+  width: 100%;
+  flex-wrap: nowrap;
+}
+.todo-item span {
+  width: 100%;
+  margin: auto;
 }
 </style>
