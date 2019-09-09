@@ -93,14 +93,14 @@
       </el-menu>
     </el-aside>
     <el-container>
-      <el-header>
+      <!-- <el-header>
         <i class="el-icon-s-fold">首页</i>
         <i class="el-icon-search"></i>
         <i class="el-icon-full-screen"></i>
         <i class></i>
         <i class></i>
         <i class></i>
-      </el-header>
+      </el-header>-->
       <el-main class="main">
         <el-row :gutter="20">
           <el-col :sm="12" :md="6" class="svg-icon svg-icon-1">
