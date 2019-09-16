@@ -45,8 +45,8 @@
             <i class="el-icon-message"></i>图标
           </template>
           <el-menu-item index="7-1">键盘图标</el-menu-item>
-          <el-menu-item index="7-1">拆线图</el-menu-item>
-          <el-menu-item index="7-1">混合图标</el-menu-item>
+          <el-menu-item index="7-2">拆线图</el-menu-item>
+          <el-menu-item index="7-3">混合图标</el-menu-item>
         </el-submenu>
         <el-submenu index="8">
           <template slot="title">
