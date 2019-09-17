@@ -8,14 +8,18 @@
               <i class="el-icon-message"></i>
               <span slot="title">{{ item.name }}</span>
             </template>
-            <el-menu-item v-for="itemchildren in item.children" :key="route.path + '/' + item.path + itemchildren.path" :index="itemchildren.path">
+            <el-menu-item
+              v-for="itemchildren in item.children"
+              :key="item.path + itemchildren.path"
+              :index="itemchildren.path"
+            >
               <i class="el-icon-message"></i>
-              <span slot="title">{{ itemchildren.name }}</span>
+              <router-link slot="title" :to="item.path + itemchildren.path">{{ itemchildren.name }}</router-link>
             </el-menu-item>
           </el-submenu>
           <el-menu-item :index="item.path" v-else>
             <i class="el-icon-message"></i>
-            <span slot="title">{{ item.name }}</span>
+            <router-link slot="title" :to="item.path">{{ item.name }}</router-link>
           </el-menu-item>
         </el-menu>
       </template>
@@ -26,10 +30,11 @@
           <el-menu-item index="/">
             <i class="el-icon-s-fold">首页</i>
           </el-menu-item>
-        <i class="el-icon-search"></i>
-        <i class="el-icon-full-screen"></i>
+          <i class="el-icon-search"></i>
+          <i class="el-icon-full-screen"></i>
         </el-menu>
       </el-header>
+      <router-view></router-view>
     </el-container>
   </el-container>
 </template>
