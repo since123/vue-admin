@@ -6,9 +6,9 @@ import FirstContainer from '@/first-container/FirstContainer'
 import Dashboard from '@/pages/dashboard'
 import Documentation from '@/pages/documentation'
 import Morechart from '@/pages/morechart'
-import Keychart from '@/pages/morechart/keychart/Keychart'
-import Linechart from '@/pages/morechart/linechart/Linechart'
-import Mixedchart from '@/pages/morechart/mixedchart/Mixedchart'
+import Keychart from '@/pages/morechart/keychart/keychart'
+import Linechart from '@/pages/morechart/linechart/linechart'
+import Mixedchart from '@/pages/morechart/mixedchart/mixedchart'
 import Authority from '@/pages/authority'
 import Pageauthority from '@/pages/authority/pageauthority/pageauthority'
 import Orderauthority from '@/pages/authority/orderauthority/orderauthority'
@@ -29,8 +29,8 @@ export default new Router({
       component: Register
     },
     {
-      path: '/first-container',
-      // redirect: '/first-container',
+      path: '/',
+      redirect: '/dashboard/index',
       name: 'FirstContainer',
       component: FirstContainer,
       children: [
@@ -41,44 +41,44 @@ export default new Router({
           component: Documentation
         },
         {
-          path: '/authority',
+          path: '/authority/',
           name: '权限测试页',
           component: Authority,
           children: [
             {
-              path: '/pageauthority',
+              path: 'pageauthority',
               name: '页面权限',
               component: Pageauthority
             },
             {
-              path: '/orderauthority',
+              path: 'orderauthority',
               name: '指令权限权限',
               component: Orderauthority
             },
             {
-              path: '/ruleauthority',
+              path: 'ruleauthority',
               name: '角色权限',
               component: Ruleauthority
             }
           ]
         },
         {
-          path: '/morechart',
+          path: '/morechart/',
           name: '图表',
           component: Morechart,
           children: [
             {
-              path: '/keychart',
+              path: 'keychart',
               name: '键盘图标',
               component: Keychart
             },
             {
-              path: '/linechart',
+              path: 'linechart',
               name: '折线图标',
               component: Linechart
             },
             {
-              path: '/mixedchart',
+              path: 'mixedchart',
               name: '混合图标',
               component: Mixedchart
             }

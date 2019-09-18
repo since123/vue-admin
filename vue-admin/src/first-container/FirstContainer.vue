@@ -27,11 +27,10 @@
     <el-container>
       <el-header>
         <el-menu default-active="/" router>
-          <el-menu-item index="/">
-            <i class="el-icon-s-fold">首页</i>
+          <el-menu-item>
+            <i class="el-icon-s-fold"></i>
+            <router-link to="/dashboard/index">首页</router-link>
           </el-menu-item>
-          <i class="el-icon-search"></i>
-          <i class="el-icon-full-screen"></i>
         </el-menu>
       </el-header>
       <router-view></router-view>
