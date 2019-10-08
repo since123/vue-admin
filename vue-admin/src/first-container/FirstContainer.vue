@@ -13,8 +13,33 @@
               :key="item.path + itemchildren.path"
               :index="itemchildren.path"
             >
-              <i class="el-icon-message"></i>
-              <router-link slot="title" :to="item.path + itemchildren.path">{{ itemchildren.name }}</router-link>
+              <template v-if="authorityInfo === 'editor'">
+                <template v-if="itemchildren.path != 'editorauthority'">
+                  <i class="el-icon-message"></i>
+                  <router-link
+                    slot="title"
+                    :to="item.path + itemchildren.path"
+                  >{{ itemchildren.name }}</router-link>
+                </template>
+              </template>
+              <div v-else-if="authorityInfo === 'visitor'">
+                <div v-if="itemchildren.path != 'visitorauthority'">
+                  <i class="el-icon-message"></i>
+                  <router-link
+                    slot="title"
+                    :to="item.path + itemchildren.path"
+                  >{{ itemchildren.name }}</router-link>
+                </div>
+              </div>
+              <div v-else>
+                <div>
+                  <i class="el-icon-message"></i>
+                  <router-link
+                    slot="title"
+                    :to="item.path + itemchildren.path"
+                  >{{ itemchildren.name }}</router-link>
+                </div>
+              </div>
             </el-menu-item>
           </el-submenu>
           <el-menu-item :index="item.path" v-else>
@@ -38,7 +63,12 @@
   </el-container>
 </template>
 <script>
-export default {}
+import { mapGetters } from 'vuex'
+export default {
+  computed: {
+    ...mapGetters(['authorityInfo'])
+  }
+}
 </script>
 <style scoped>
 </style>

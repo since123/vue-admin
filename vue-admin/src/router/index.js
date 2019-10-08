@@ -10,16 +10,16 @@ import Keychart from '@/pages/morechart/keychart/keychart'
 import Linechart from '@/pages/morechart/linechart/linechart'
 import Mixedchart from '@/pages/morechart/mixedchart/mixedchart'
 import Authority from '@/pages/authority'
-import Pageauthority from '@/pages/authority/pageauthority/pageauthority'
-import Orderauthority from '@/pages/authority/orderauthority/orderauthority'
 import Ruleauthority from '@/pages/authority/ruleauthority/ruleauthority'
+import Editorauthority from '@/pages/authority/editorauthority/editorauthority'
+import Visitorauthority from '@/pages/authority/visitorauthority/visitorauthority'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/',
+      path: '/login',
       name: 'Login',
       component: Login
     },
@@ -46,19 +46,19 @@ export default new Router({
           component: Authority,
           children: [
             {
-              path: 'pageauthority',
-              name: '页面权限',
-              component: Pageauthority
-            },
-            {
-              path: 'orderauthority',
-              name: '指令权限权限',
-              component: Orderauthority
-            },
-            {
               path: 'ruleauthority',
               name: '角色权限',
               component: Ruleauthority
+            },
+            {
+              path: 'editorauthority',
+              name: 'editor角色测试页',
+              component: Editorauthority
+            },
+            {
+              path: 'visitorauthority',
+              name: 'visitor角色测试页',
+              component: Visitorauthority
             }
           ]
         },

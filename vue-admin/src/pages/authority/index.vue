@@ -5,14 +5,14 @@
 </template>
 
 <script>
-import Pageauthority from '@/pages/authority/pageauthority/pageauthority'
-import Orderauthority from '@/pages/authority/orderauthority/orderauthority'
 import Ruleauthority from '@/pages/authority/ruleauthority/ruleauthority'
+import Editorauthority from '@/pages/authority/editorauthority/editorauthority'
+import Visitorauthority from '@/pages/authority/visitorauthority/visitorauthority'
 export default {
   components: {
-    Pageauthority,
-    Orderauthority,
-    Ruleauthority
+    Ruleauthority,
+    Editorauthority,
+    Visitorauthority
   }
 }
 </script>
