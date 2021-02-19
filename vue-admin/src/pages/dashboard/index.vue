@@ -110,7 +110,11 @@ import ListItem from './components/ListItem'
 import Todo from './components/Todo'
 import ImageProgress from './components/ImageProgress'
 
+import tracker from '@/mixins/tracker'
+
 export default {
+  mixins: [tracker],
+
   components: {
     Chart,
     ListItem,

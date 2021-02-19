@@ -8,7 +8,11 @@
 import Ruleauthority from '@/pages/authority/ruleauthority/ruleauthority'
 import Editorauthority from '@/pages/authority/editorauthority/editorauthority'
 import Visitorauthority from '@/pages/authority/visitorauthority/visitorauthority'
+import tracker from '@/mixins/tracker'
+
 export default {
+  isPage: true,
+  mixins: [tracker],
   components: {
     Ruleauthority,
     Editorauthority,
@@ -17,5 +21,4 @@ export default {
 }
 </script>
 
-<style>
-</style>
+<style></style>

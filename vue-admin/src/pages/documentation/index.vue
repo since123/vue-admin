@@ -7,7 +7,10 @@
   </el-main>
 </template>
 <script>
-export default {}
+import tracker from '@/mixins/tracker'
+
+export default {
+  mixins: [tracker]
+}
 </script>
-<style scoped>
-</style>
+<style scoped></style>

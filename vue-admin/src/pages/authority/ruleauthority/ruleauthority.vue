@@ -12,13 +12,35 @@
       </el-dropdown-menu>
     </el-dropdown>
     <el-table :data="tableData" border style="width: 100%">
-      <el-table-column prop="rolekey" label="roleKey" style="width: 15%"></el-table-column>
-      <el-table-column prop="roleName" label="roleName" style="width: 15%"></el-table-column>
-      <el-table-column prop="description" label="description" style="width: 30%"></el-table-column>
-      <el-table-column fixed="right" prop="operations" label="operations" style="width: 40%">
+      <el-table-column
+        prop="rolekey"
+        label="roleKey"
+        style="width: 15%"
+      ></el-table-column>
+      <el-table-column
+        prop="roleName"
+        label="roleName"
+        style="width: 15%"
+      ></el-table-column>
+      <el-table-column
+        prop="description"
+        label="description"
+        style="width: 30%"
+      ></el-table-column>
+      <el-table-column
+        fixed="right"
+        prop="operations"
+        label="operations"
+        style="width: 40%"
+      >
         <template slot-scope="scope">
           <!-- <el-button type="text" @click="editAuthority(scope.row)" size="small">编辑权限</el-button> -->
-          <el-button type="text" @click="deleteAuthority(scope.$index, tableData)" size="small">删除</el-button>
+          <el-button
+            type="text"
+            @click="deleteAuthority(scope.$index, tableData)"
+            size="small"
+            >删除</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
@@ -26,7 +48,10 @@
 </template>
 <script>
 import store from '../../../store'
+import tracker from '@/mixins/tracker'
+
 export default {
+  mixins: [tracker],
   data() {
     return {
       tableData: [

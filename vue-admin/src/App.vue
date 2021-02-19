@@ -6,7 +6,16 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  mounted() {
+    let data = {
+      text: 'ok'
+    }
+    let blob = new Blob([JSON.stringify(data)])
+    window.addEventListener('unload', () => {
+      navigator.sendBeacon('http://localhost:3000/log', blob)
+    })
+  }
 }
 </script>
 
