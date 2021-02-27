@@ -88,10 +88,67 @@
 
     <el-row class="order-on" :gutter="16">
       <el-col :span="12" :sm="24" :md="12">
-        <el-table :data="tableData" style="width: 100%" class="order">
-          <el-table-column prop="date" label="日期"></el-table-column>
-          <el-table-column prop="name" label="姓名"></el-table-column>
-          <el-table-column prop="address" label="地址"></el-table-column>
+        <el-table
+          :data="tableData1"
+          style="width: 100%"
+          class="order"
+          border
+          :span-method="arraySpanMethod"
+        >
+          <el-table-column
+            prop="chargeStartTime"
+            label="充电记录"
+          ></el-table-column>
+          <el-table-column
+            prop="chargeStartTime"
+            label="充电开始时间"
+          ></el-table-column>
+          <el-table-column
+            prop="chargeEndTime"
+            label="充电结束时间"
+          ></el-table-column>
+          <el-table-column
+            prop="chargeStartSoc"
+            label="充电起始电量"
+          ></el-table-column>
+          <el-table-column
+            prop="chargeEndSoc"
+            label="充电结束电量"
+          ></el-table-column>
+          <el-table-column
+            prop="referenceChargeCurrent"
+            label="电量"
+          ></el-table-column>
+          <el-table-column label="时长">
+            <el-table-column
+              prop="referenceChargeCurrent"
+              label="计算值"
+            ></el-table-column>
+            <el-table-column
+              prop="referenceChargeCurrent"
+              label="参考值"
+            ></el-table-column>
+          </el-table-column>
+          <el-table-column label="电流">
+            <el-table-column
+              prop="referenceChargeCurrent"
+              label="计算值"
+            ></el-table-column>
+            <el-table-column
+              prop="referenceChargeCurrent"
+              label="参考值"
+            ></el-table-column>
+          </el-table-column>
+          <el-table-column prop="referenceChargeCurrent" label="电池包温度">
+            <el-table-column
+              prop="referenceChargeCurrent"
+              label="计算值"
+            ></el-table-column>
+            <el-table-column
+              prop="referenceChargeCurrent"
+              label="参考值"
+            ></el-table-column>
+          </el-table-column>
         </el-table>
       </el-col>
       <el-col :span="6" :sm="24" :md="6">
@@ -109,7 +166,7 @@ import Chart from './components/Chart'
 import ListItem from './components/ListItem'
 import Todo from './components/Todo'
 import ImageProgress from './components/ImageProgress'
-
+import tableData from '@/assets/table.json'
 import tracker from '@/mixins/tracker'
 
 export default {
@@ -278,37 +335,78 @@ export default {
           }
         ]
       },
-      tableData: [
-        {
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路1518弄'
-        },
-        {
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路1518弄'
-        },
-        {
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路1518弄'
-        },
-        {
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路1518弄'
-        },
-        {
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路1518弄'
-        }
-      ],
+      tableData1: [],
+      // tableData: [
+      // {
+      //   date: '2016-05-02',
+      //   name: '王小虎',
+      //   address: '上海市普陀区金沙江路1518弄'
+      // },
+      // {
+      //   date: '2016-05-02',
+      //   name: '王小虎',
+      //   address: '上海市普陀区金沙江路1518弄'
+      // },
+      // {
+      //   date: '2016-05-02',
+      //   name: '王小虎',
+      //   address: '上海市普陀区金沙江路1518弄'
+      // },
+      // {
+      //   date: '2016-05-02',
+      //   name: '王小虎',
+      //   address: '上海市普陀区金沙江路1518弄'
+      // },
+      // {
+      //   date: '2016-05-02',
+      //   name: '王小虎',
+      //   address: '上海市普陀区金沙江路1518弄'
+      // }
+      // ],
       radio: '1',
       inputValue: '',
-      List: []
+      List: [],
+      tableArr: [],
+      tablePos: 0
     }
+  },
+  methods: {
+    arraySpanMethod({ row, column, rowIndex, columnIndex }) {
+      if (
+        columnIndex === 0 ||
+        columnIndex === 1 ||
+        columnIndex === 2 ||
+        columnIndex === 3
+      ) {
+        // 第一列的合并方法,省
+        const row1 = this.tableArr[rowIndex]
+        const col1 = row1 > 0 ? 1 : 0 // 如果被合并了_row=0则它这个列需要取消
+        return {
+          rowspan: row1,
+          colspan: col1
+        }
+      }
+    }
+  },
+  created() {
+    console.log('tableData', tableData)
+    this.tableData1 = tableData.data.carList
+    for (var i = 0; i < this.tableData1.length; i++) {
+      if (i === 0) {
+        // 第一行必须存在
+        this.tableArr.push(1)
+        this.tablePos = 0
+      } else {
+        if (this.tableData1[i].sign === this.tableData1[i - 1].sign) {
+          this.tableArr[this.tablePos] += 1
+          this.tableArr.push(0)
+        } else {
+          this.tableArr.push(1)
+          this.tablePos = i
+        }
+      }
+    }
+    console.log('tableArr', this.tableArr)
   }
 }
 </script>

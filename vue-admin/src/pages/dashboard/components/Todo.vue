@@ -2,28 +2,43 @@
   <div class="checkbox">
     <div class="radio-text">
       <el-input v-model="inputValue" placeholder="Todo List"></el-input>
-      <el-button type="primary" size="mini" @click="getTodoitem()">添加</el-button>
+      <el-button type="primary" size="mini" @click="getTodoitem()"
+        >添加</el-button
+      >
     </div>
-    <ul>
-      <li class="todo-item" v-for="(item, index) in showFilterList" :key="index">
+
+    <transition-group tag="ul" name="list">
+      <li
+        v-for="(item, idx) in showFilterList"
+        :key="showFilterList.length - idx"
+      >
         <el-checkbox class="radio-box" v-model="item.resolved"></el-checkbox>
-        <span>{{item.content}}</span>
-        <el-button @click="deleteitem(index)" type="text" icon="el-icon-delete" size="small"></el-button>
+        <span>{{ item.content }}</span>
+        <el-button
+          @click="deleteitem(index)"
+          type="text"
+          icon="el-icon-delete"
+          size="small"
+        ></el-button>
       </li>
-    </ul>
+    </transition-group>
+
     <el-button-group>
       <el-button
-        @click="currentFilter='all'"
+        @click="currentFilter = 'all'"
         :type="currentFilter === 'all' ? 'primary' : 'default'"
-      >全部</el-button>
+        >全部</el-button
+      >
       <el-button
-        @click="currentFilter='resolved'"
+        @click="currentFilter = 'resolved'"
         :type="currentFilter === 'resolved' ? 'primary' : 'default'"
-      >已完成</el-button>
+        >已完成</el-button
+      >
       <el-button
-        @click="currentFilter='pendding'"
+        @click="currentFilter = 'pendding'"
         :type="currentFilter === 'pendding' ? 'primary' : 'default'"
-      >未完成</el-button>
+        >未完成</el-button
+      >
     </el-button-group>
   </div>
 </template>
@@ -32,30 +47,11 @@ export default {
   data() {
     return {
       inputValue: '',
-      List: [
+      list: [
         {
           content: 'todoone',
-          resolved: true
-        },
-        {
-          content: 'todotwo',
-          resolved: false
-        },
-        {
-          content: 'todothreen',
-          resolved: true
-        },
-        {
-          content: 'todofour',
-          resolved: true
-        },
-        {
-          content: 'todofive',
-          resolved: false
-        },
-        {
-          content: 'todosix',
-          resolved: true
+          resolved: true,
+          id: 1
         }
       ],
       currentFilter: 'all'
@@ -66,19 +62,20 @@ export default {
       switch (this.currentFilter) {
         case 'all':
         default:
-          return this.List
-
+          return this.list
         case 'resolved':
-          return this.List.filter(item => item.resolved)
-
+          return this.list.filter(item => item.resolved)
         case 'pendding':
-          return this.List.filter(item => !item.resolved)
+          return this.list.filter(item => !item.resolved)
       }
     }
   },
   methods: {
     getTodoitem: function() {
-      this.List.push({ content: this.inputValue, resolved: false })
+      this.list.splice(0, 0, {
+        content: this.inputValue,
+        resolved: false
+      })
       this.inputValue = ''
     },
     deleteitem: function(index) {
@@ -88,28 +85,47 @@ export default {
 }
 </script>
 <style scoped>
-.radio-text {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-}
-.radio-box {
-  margin-right: 0;
-  box-sizing: border-box;
-  padding: 15px;
+ul {
+  position: relative;
+  padding-top: 18px;
 }
 
-.todo-item {
-  display: flex;
-  width: 100%;
-  flex-wrap: nowrap;
+li {
+  display: block;
+  margin-top: 8px;
+  padding: 8px 12px;
 }
-.todo-item span {
-  width: 100%;
-  margin: auto;
+
+.list-enter-active,
+.list-leave-active,
+.list-move {
+  transition: transform 500ms cubic-bezier(0.59, 0.12, 0.34, 0.95),
+    border 5000ms cubic-bezier(0.59, 0.12, 0.34, 0.95);
+  transition-property: opacity, transform, border;
 }
-.el-button-group {
-  display: flex;
-  justify-content: space-between;
+
+.list-enter {
+  opacity: 0;
+  transform: translateX(50px) scaleY(0.5);
+  border: 1px solid red;
+}
+
+.list-enter-to {
+  opacity: 1;
+  transform: translateX(0) scaleY(1);
+  border: 1px solid red;
+}
+
+.list-leave-active {
+  position: absolute;
+  border: 1px solid red;
+  transition-duration: 5000ms;
+}
+
+.list-leave-to {
+  opacity: 0;
+  transform: scaleY(0);
+  transform-origin: center top;
+  border: 1px solid red;
 }
 </style>
