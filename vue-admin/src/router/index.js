@@ -13,6 +13,7 @@ import Authority from '@/pages/authority'
 import Ruleauthority from '@/pages/authority/ruleauthority/ruleauthority'
 import Editorauthority from '@/pages/authority/editorauthority/editorauthority'
 import Visitorauthority from '@/pages/authority/visitorauthority/visitorauthority'
+import PathNavigator from '@/pages/Amap/pathNavigator/pathNavigator'
 
 Vue.use(Router)
 
@@ -83,6 +84,11 @@ export default new Router({
               component: Mixedchart
             }
           ]
+        },
+        {
+          path: '/pathNavigator',
+          name: '巡航器-飞单',
+          component: PathNavigator
         }
       ]
     }

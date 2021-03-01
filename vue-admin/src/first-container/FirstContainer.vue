@@ -52,9 +52,9 @@
             </el-submenu>
             <el-menu-item :index="item.path" :key="item.path" v-else>
               <i class="el-icon-message" :index="item.path"></i>
-              <router-link slot="title" :to="item.path"
-                >{{ item.name }}{{ item.path }}</router-link
-              >
+              <router-link slot="title" :to="item.path">{{
+                item.name
+              }}</router-link>
             </el-menu-item>
           </template>
         </el-menu>
@@ -69,7 +69,9 @@
           </el-menu-item>
         </el-menu>
       </el-header>
-      <router-view></router-view>
+      <div style="padding: 20px">
+        <router-view></router-view>
+      </div>
     </el-container>
   </el-container>
 </template>

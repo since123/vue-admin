@@ -1,9 +1,11 @@
 <template>
-    <div>混合图标</div>
+  <el-main>混合图标</el-main>
 </template>
 <script>
-export default {
-}
+export default {}
 </script>
 <style scoped>
+.el-main {
+  padding: 0;
+}
 </style>

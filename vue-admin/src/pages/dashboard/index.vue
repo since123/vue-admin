@@ -412,8 +412,8 @@ export default {
 </script>
 
 <style scoped>
-.main {
-  background: #eaecef;
+.el-main {
+  padding: 0;
 }
 .el-icon-s-fold::before {
   margin-right: 20px;

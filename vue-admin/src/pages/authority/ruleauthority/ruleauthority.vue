@@ -88,7 +88,7 @@ export default {
 }
 </script>
 <style scoped>
-.el-dropdown {
-  bottom: 10px;
+.el-main {
+  padding: 0;
 }
 </style>

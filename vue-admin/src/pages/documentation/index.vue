@@ -13,4 +13,8 @@ export default {
   mixins: [tracker]
 }
 </script>
-<style scoped></style>
+<style scoped>
+.el-main {
+  padding: 0;
+}
+</style>
