@@ -13,7 +13,9 @@ import Authority from '@/pages/authority'
 import Ruleauthority from '@/pages/authority/ruleauthority/ruleauthority'
 import Editorauthority from '@/pages/authority/editorauthority/editorauthority'
 import Visitorauthority from '@/pages/authority/visitorauthority/visitorauthority'
-import PathNavigator from '@/pages/Amap/pathNavigator/pathNavigator'
+import Amap from '@/pages/amap'
+import PathNavigator from '@/pages/amap/pathNavigator/pathNavigator'
+import DrawBounds from '@/pages/amap/drawBounds/drawBounds'
 
 Vue.use(Router)
 
@@ -86,9 +88,21 @@ export default new Router({
           ]
         },
         {
-          path: '/pathNavigator',
-          name: '巡航器-飞单',
-          component: PathNavigator
+          path: '/amap/',
+          name: '高德地图',
+          component: Amap,
+          children: [
+            {
+              path: 'pathNavigator',
+              name: '巡航器-飞单',
+              component: PathNavigator,
+            },
+            {
+              path: 'drawBounds',
+              name: '行政区标注',
+              component: DrawBounds,
+            }
+          ]
         }
       ]
     }

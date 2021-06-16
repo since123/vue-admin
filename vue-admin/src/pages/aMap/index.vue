@@ -5,11 +5,13 @@
 </template>
 
 <script>
-import PathNavigator from '@/pages/Amap/PathNavigator/PathNavigator'
+import PathNavigator from '@/pages/amap/pathNavigator/pathNavigator'
+import DrawBounds from '@/pages/amap/drawBounds/drawBounds'
 
 export default {
   components: {
-    PathNavigator
+    PathNavigator,
+    DrawBounds
   }
 }
 </script>
