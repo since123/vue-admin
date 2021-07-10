@@ -158,6 +158,16 @@
         <ImageProgress></ImageProgress>
       </el-col>
     </el-row>
+    <el-row :gutter="16">
+      <el-col :span="24">
+        <form-con
+          @submit="submit"
+          :skip="skip"
+          :formInline="formInline"
+        ></form-con>
+        <el-button @click="changeSkip">改变年龄</el-button>
+      </el-col>
+    </el-row>
   </el-main>
 </template>
 
@@ -168,6 +178,7 @@ import Todo from './components/Todo'
 import ImageProgress from './components/ImageProgress'
 import tableData from '@/assets/table.json'
 import tracker from '@/mixins/tracker'
+import FormCon from './components/FormCon.vue'
 
 export default {
   mixins: [tracker],
@@ -176,7 +187,8 @@ export default {
     Chart,
     ListItem,
     Todo,
-    ImageProgress
+    ImageProgress,
+    FormCon
   },
 
   data() {
@@ -367,7 +379,11 @@ export default {
       inputValue: '',
       List: [],
       tableArr: [],
-      tablePos: 0
+      tablePos: 0,
+      skip: 10,
+      formInline: {
+        age: 10
+      }
     }
   },
   methods: {
@@ -386,10 +402,18 @@ export default {
           colspan: col1
         }
       }
+    },
+    changeSkip() {
+      this.skip++
+      this.formInline.age = this.skip
+    },
+    submit(formInline) {
+      console.log('formInline', formInline)
     }
   },
   created() {
-    console.log('tableData', tableData)
+    // console.log('tableData', tableData)
+    // let tableData = []
     this.tableData1 = tableData.data.carList
     for (var i = 0; i < this.tableData1.length; i++) {
       if (i === 0) {
