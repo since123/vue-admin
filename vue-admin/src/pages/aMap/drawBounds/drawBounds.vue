@@ -49,31 +49,31 @@ export default {
     initMap() {
       this.map = new AMap.Map('container', {
         resizeEnable: true,
-        center: [116.397428, 39.90923], //地图中心点
-        zoom: 10 //地图显示的缩放级别
+        center: [116.397428, 39.90923], // 地图中心点
+        zoom: 10 // 地图显示的缩放级别
       })
     },
     drawBounds() {
-      //加载行政区划插件
+      // 加载行政区划插件
       if (!this.district) {
-        //实例化DistrictSearch
+        // 实例化DistrictSearch
         var opts = {
-          subdistrict: 0, //获取边界不需要返回下级行政区
-          extensions: 'all', //返回行政区边界坐标组等具体信息
-          level: 'district' //查询行政级别为 市
+          subdistrict: 0, // 获取边界不需要返回下级行政区
+          extensions: 'all', // 返回行政区边界坐标组等具体信息
+          level: 'district' // 查询行政级别为 市
         }
         this.district = new AMap.DistrictSearch(opts)
       }
-      //行政区查询
+      // 行政区查询
 
       this.district.setLevel(this.level)
       this.district.search(this.area, (status, result) => {
-        this.map.remove(this.polygons) //清除上次结果
+        this.map.remove(this.polygons) // 清除上次结果
         this.polygons = []
         var bounds = result.districtList[0].boundaries
         if (bounds) {
           for (var i = 0, l = bounds.length; i < l; i++) {
-            //生成行政区划polygon
+            // 生成行政区划polygon
             var polygon = new AMap.Polygon({
               strokeWeight: 1,
               path: bounds[i],
@@ -85,7 +85,7 @@ export default {
           }
         }
         this.map.add(this.polygons)
-        this.map.setFitView(this.polygons) //视口自适应
+        this.map.setFitView(this.polygons) // 视口自适应
       })
     },
     drawClick() {
