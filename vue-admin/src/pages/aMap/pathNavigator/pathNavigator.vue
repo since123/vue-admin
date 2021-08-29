@@ -11,7 +11,9 @@ export default {
     }
   },
   methods: {},
-  created() {},
+  created() {
+    console.log('22')
+  },
   mounted() {
     var map = new AMap.Map('container', {
       resizeEnable: true,
@@ -79,7 +81,7 @@ export default {
       })
 
       navg1.start()
-    }) 
+    })
     // AMap.plugin('AMap.Geolocation', function() {
     //   var geolocation = new AMap.Geolocation({
     //     enableHighAccuracy: true, //是否使用高精度定位，默认:true

@@ -16,6 +16,7 @@ import Visitorauthority from '@/pages/authority/visitorauthority/visitorauthorit
 import Amap from '@/pages/amap'
 import PathNavigator from '@/pages/amap/pathNavigator/pathNavigator'
 import DrawBounds from '@/pages/amap/drawBounds/drawBounds'
+import HeatMap from '@/pages/amap/heatMap'
 
 Vue.use(Router)
 
@@ -95,12 +96,17 @@ export default new Router({
             {
               path: 'pathNavigator',
               name: '巡航器-飞单',
-              component: PathNavigator,
+              component: PathNavigator
             },
             {
               path: 'drawBounds',
               name: '行政区标注',
-              component: DrawBounds,
+              component: DrawBounds
+            },
+            {
+              path: 'heatMap',
+              name: '热力图',
+              component: HeatMap
             }
           ]
         }

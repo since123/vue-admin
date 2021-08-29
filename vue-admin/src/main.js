@@ -7,12 +7,19 @@ import echarts from 'echarts'
 import App from './App'
 import router from './router'
 import store from './store'
-import AMap from 'vue-amap'
-Vue.use(AMap)
-AMap.initAMapApiLoader({
-  key: 'db65afe419d6c18850d77b536436e5b0', // 刚刚开发者申请哪里的key
-  plugin: ['AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType']
-})
+// import AMap from 'vue-amap'
+// Vue.use(AMap)
+// AMap.initAMapApiLoader({
+//   version: '2.0',
+//   key: 'db65afe419d6c18850d77b536436e5b0', // 刚刚开发者申请哪里的key
+//   plugin: [
+//     'AMap.Scale',
+//     'AMap.OverView',
+//     'AMap.ToolBar',
+//     'AMap.MapType',
+//     'AMap.Heatmap'
+//   ]
+// })
 Vue.use(ElementUI)
 Vue.use(echarts)
 Vue.prototype.$echarts = echarts
