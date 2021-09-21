@@ -106,6 +106,8 @@ export default {
             bounds.northEast.lng,
             bounds.northEast.lat
           ]
+          // bbox
+
           const views = index.getClusters(bbox, map.getZoom())
           const clusters = views.filter(view => view.isClutser) // 多个点聚合之后的点
           const data = views.filter(view => !view.isClutser) // 原始点
