@@ -20,7 +20,7 @@ export default {
       vm.map = new AMap.Map('container', {
         resizeEnable: true,
         center: [116.418261, 39.921984],
-        zoom: 11
+        zoom: 4
       })
 
       vm.map.plugin(['AMap.HeatMap'], function() {
@@ -39,11 +39,52 @@ export default {
                */
         })
         //设置数据集：该数据为北京部分“公园”数据
+        for (let n = 0; n < 60000; n++) {
+          heatmapData.push(heatmapData[0])
+        }
+        console.log('heatmapData', heatmapData)
         vm.heatmap.setDataSet({
           data: heatmapData,
           max: 100
         })
+        AMapUI.load(['ui/misc/PointSimplifier', 'lib/$'], function(
+          PointSimplifier,
+          $
+        ) {
+          if (!PointSimplifier.supportCanvas) {
+            alert('当前环境不支持 Canvas！')
+            return
+          }
 
+          var pointSimplifierIns = new PointSimplifier({
+            map: vm.map, //所属的地图实例
+            getPosition: function(item) {
+              if (!item) {
+                return null
+              }
+              // console.log('item', item)
+              // var parts = item.split(',')
+
+              //返回经纬度
+              return [item.lng, item.lat]
+            },
+            renderOptions: {
+              pointStyle: {
+                content: 'circle',
+                width: 6,
+                height: 6
+              },
+
+              //点的硬核部分
+              pointHardcoreStyle: {
+                content: 'none',
+                width: 60,
+                height: 60
+              }
+            }
+          })
+          pointSimplifierIns.setData(heatmapData.splice(0, 450))
+        })
         // for (const point of heatmapData) {
         //   var marker = new AMap.Marker({
         //     position: new AMap.LngLat(point.lng, point.lat), // 经纬度对象，也可以是经纬度构成的一维数组[116.39, 39.9]
@@ -56,38 +97,38 @@ export default {
         //   // 移除已创建的 marker
         // }
 
-        var styles = [
-          {
-            url: 'https://webapi.amap.com/images/mass/mass0.png',
-            anchor: new AMap.Pixel(6, 6),
-            size: new AMap.Size(11, 11),
-            zIndex: 3,
-            opacity: 0
-          }
-        ]
+        // var styles = [
+        //   {
+        //     url: 'https://webapi.amap.com/images/mass/mass0.png',
+        //     anchor: new AMap.Pixel(6, 6),
+        //     size: new AMap.Size(11, 11),
+        //     zIndex: 3,
+        //     opacity: 0
+        //   }
+        // ]
 
-        const markers = heatmapData.map((point, index) => ({
-          lnglat: [point.lng, point.lat],
-          name: index,
-          style: styles[0]
-        }))
+        // const markers = heatmapData.map((point, index) => ({
+        //   lnglat: [point.lng, point.lat],
+        //   name: index,
+        //   style: styles[0]
+        // }))
 
-        var mass = new AMap.MassMarks(markers, {
-          opacity: 0.8,
-          zIndex: 111,
-          cursor: 'pointer',
-          style: styles
-        })
+        // var mass = new AMap.MassMarks(markers, {
+        //   opacity: 0.8,
+        //   zIndex: 111,
+        //   cursor: 'pointer',
+        //   style: styles
+        // })
 
-        mass.on('click', function(e) {
-          console.log(e)
-        })
+        // mass.on('click', function(e) {
+        //   console.log(e)
+        // })
 
-        mass.setMap(vm.map)
+        // mass.setMap(vm.map)
 
-        // 创建一个 Marker 实例：
+        // // 创建一个 Marker 实例：
 
-        window.heatmap = vm.heatmap
+        // window.heatmap = vm.heatmap
       })
     }
   },

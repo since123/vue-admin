@@ -17,6 +17,7 @@ import Amap from '@/pages/amap'
 import PathNavigator from '@/pages/amap/pathNavigator/pathNavigator'
 import DrawBounds from '@/pages/amap/drawBounds/drawBounds'
 import HeatMap from '@/pages/amap/heatMap'
+import Heatmap3d from '@/pages/amap/heatmap3d'
 
 Vue.use(Router)
 
@@ -107,6 +108,11 @@ export default new Router({
               path: 'heatMap',
               name: '热力图',
               component: HeatMap
+            },
+            {
+              path: 'heatmap3d',
+              name: '3d热力图',
+              component: Heatmap3d
             }
           ]
         }
